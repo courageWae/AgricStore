@@ -17,13 +17,13 @@
 								<a href="{{ route('equipments') }}" class="dropdown-toggle  hyper" ><span>Equipments</span></a>
 							</li>
 							<li class="dropdown">
-								<a href="#" class="dropdown-toggle hyper"><span>Fertilizers</span></a>
+								<a href="{{ route('fertilizers') }}" class="dropdown-toggle hyper"><span>Fertilizers</span></a>
 							</li>
 							<li class="dropdown">
-								<a href="#" class="dropdown-toggle hyper" data-toggle="dropdown" ><span>Food Stuffs</span></a>
+								<a href="{{ route('foodStuffs') }}" class="dropdown-toggle hyper" data-toggle="dropdown" ><span>Food Stuffs</span></a>
 							</li>
 							<!-- <li><a href="codes.html" class="hyper"> <span>Codes</span></a></li> -->
-							<li><a href="contact.html" class="hyper"><span>Contact Us</span></a></li>
+							<li><a href="{{ route('contact') }}" class="hyper"><span>Contact Us</span></a></li>
 						</ul>
 					</div>
 				</nav>

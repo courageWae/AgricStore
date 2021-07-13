@@ -16,4 +16,19 @@ class BigStoreController extends Controller
         return view('BigStore.equipments');
     }
 
+    public function fertilizers()
+    {
+        return view('BigStore.fertilizers');
+    }
+
+    public function foodStuffs()
+    {
+        return view('BigStore.foodStuffs');
+    }
+
+    public function contact()
+    {
+        return view('BigStore.contact');
+    }
+
 }

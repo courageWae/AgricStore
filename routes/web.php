@@ -22,3 +22,17 @@ use App\Http\Controllers\BigStoreController;
 
 Route::get('/', [BigStoreController::class, 'index'] )->name('home');
 Route::get('equipments', [BigStoreController::class, 'equipments'])->name('equipments');
+Route::get('fertilizers', [BigStoreController::class, 'fertilizers'])->name('fertilizers');
+Route::get('foodStuffs', [BigStoreController::class, 'foodStuffs'])->name('foodStuffs');
+Route::get('contact', [BigStoreController::class, 'contact'])->name('contact');
+
+
+
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
