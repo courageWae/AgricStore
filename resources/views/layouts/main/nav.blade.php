@@ -11,7 +11,7 @@
 					</div>
 					<div class="collapse navbar-collapse" id="bs-megadropdown-tabs">
 						<ul class="nav navbar-nav ">
-							<li class=" active"><a href="{{ route('home') }}" class="hyper "><span>Home</span></a></li>
+							<li class=" active"><a href="{{ route('index') }}" class="hyper "><span>Home</span></a></li>
 
 							<li class="dropdown ">
 								<a href="{{ route('equipments') }}" class="dropdown-toggle  hyper" ><span>Equipments</span></a>
@@ -20,7 +20,7 @@
 								<a href="{{ route('fertilizers') }}" class="dropdown-toggle hyper"><span>Fertilizers</span></a>
 							</li>
 							<li class="dropdown">
-								<a href="{{ route('foodStuffs') }}" class="dropdown-toggle hyper" data-toggle="dropdown" ><span>Food Stuffs</span></a>
+								<a href="{{ route('foodStuffs') }}" class="dropdown-toggle hyper"><span>Food Stuffs</span></a>
 							</li>
 							<!-- <li><a href="codes.html" class="hyper"> <span>Codes</span></a></li> -->
 							<li><a href="{{ route('contact') }}" class="hyper"><span>Contact Us</span></a></li>

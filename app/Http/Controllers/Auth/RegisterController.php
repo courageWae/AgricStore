@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
+use Illuminate\Support\Str;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -29,7 +30,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+    //protected $redirectTo = RouteServiceProvider::HOME;
 
     /**
      * Create a new controller instance.
@@ -39,6 +40,13 @@ class RegisterController extends Controller
     public function __construct()
     {
         $this->middleware('guest');
+    }
+
+    public function redirectTo() # redirect user based on role name.
+    {
+        if( auth()->check() && auth()->user()->role->name == "user") return route("user.dashboard") ;
+
+        if( auth()->check() && auth()->user()->role->name == "admin") return route("admin.dashboard") ;
     }
 
     /**
@@ -52,7 +60,9 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'user_name' => ['required', 'string', 'min:5', 'max:10'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'role_id' => ['required']
         ]);
     }
 
@@ -67,6 +77,9 @@ class RegisterController extends Controller
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
+            'user_name' => $data['user_name'],
+            'alias' => Str::of( $data['name'] . " " . $data['user_name'])->slug("-"),
+            'role_id' => $data['role_id'] ,
             'password' => Hash::make($data['password']),
         ]);
     }
