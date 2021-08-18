@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Auth;
-
+//use App\Models\UserProduct;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
@@ -41,8 +41,20 @@ class LoginController extends Controller
 
     public function redirectTo()
     {
-        if( auth()->check() && auth()->user()->role == 'user') return route("user.dashboard") ;
+        if( auth()->check() && auth()->user()->role_id === 2)
+        {
+            $this->checkSession();
+            return route("user.orders") ;
+        }
+        else if(auth()->check() && auth()->user()->role_id === 1) 
+        {
+          return route("admin.dashboard") ;
+        }           
+    }
 
-        if( auth()->check() && auth()->user()->role == 'admin') return route("admin.dashboard") ;
+    private function checkSession()
+    {
+        if(request()->session()->has("rand")) request()->session()->forget("rand");
+        return 0;
     }
 }

@@ -9,7 +9,7 @@
   <meta name="keyword" content="Creative, Dashboard, Admin, Template, Theme, Bootstrap, Responsive, Retina, Minimal">
   <link rel="shortcut icon" href="img/favicon.png">
 
-  <title>{{ config('app.name','Lexicon Support Service') }}</title>
+  <title>{{ config('app.name','Agric Store') }}</title>
 
   <!-- Bootstrap CSS -->
   <link href="{{ asset('admin/css/bootstrap.min.css') }}" rel="stylesheet">
@@ -42,7 +42,7 @@
           <div class="col-lg-12">
             <h3 class="page-header"><i class="fa fa-table"></i>Administrators</h3>
             <ol class="breadcrumb">
-              <li><i class="fa fa-home"></i><a href="{{ route('legal.home') }}">Home</a></li>
+              <li><i class="fa fa-home"></i><a href="{{ route('index') }}">Home</a></li>
               <li><i class="fa fa-table"></i>Table</li>
               <li><i class="fa fa-th-list"></i>List of Administrators</li>
             </ol>

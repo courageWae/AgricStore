@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use App\Models\Role;
+use App\Models\Invoice;
+use App\Models\UserProduct;
 
 
 class User extends Authenticatable
@@ -21,10 +23,13 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'phone',
         'password',
         'role_id',
         'user_name',
-        'alias'
+        'alias',
+        'verification_code',
+        'photo'
     ];
 
     /**
@@ -46,13 +51,36 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function role() # creating a database relationship
+    public function role() # creating a database relationship with role table
     {
         return $this->belongsTo(Role::class);
     }
+
+    public function userProduct()
+    {
+        return $this->hasMany(UserProduct::class);
+    }
+
+    public function invoice()
+    {
+        return $this->hasMany(Invoice::class);
+    }
+
+
 
     public function getRoutKeyName()
     {
         return "alias" ;
     }
+
+    public function scopeClient( $query )
+    {
+        return $this->where("role_id", 2)->get() ;
+    }
+
+    public function scopeAdmin( $query )
+    {
+        return $this->where("role_id", 1)->get();
+    }
+
 }

@@ -37,10 +37,20 @@
                         @enderror
 						<div class="key">
 							<i class="fa fa-user" aria-hidden="true"></i>
-							<input  type="text" value="user name" name="user_name" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'user_name';}" class="@error('user_name') is-invalid @enderror" required>
+							<input  type="text" value="user name" name="user name" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'user_name';}" class="@error('user_name') is-invalid @enderror" required>
 							<div class="clearfix"></div>
 						</div>
 						@error('user_name')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+						<div class="key">
+							<i class="fa fa-user" aria-hidden="true"></i>
+							<input  type="text" value="Phone Number" name="phone" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'phone';}" class="@error('phone') is-invalid @enderror" required>
+							<div class="clearfix"></div>
+						</div>
+						@error('phone')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>

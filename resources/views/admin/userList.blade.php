@@ -9,7 +9,7 @@
   <meta name="keyword" content="Creative, Dashboard, Admin, Template, Theme, Bootstrap, Responsive, Retina, Minimal">
   <link rel="shortcut icon" href="img/favicon.png">
 
-  <title>{{ config('app.name','Lexicon Support Service') }}</title>
+  <title>{{ config('app.name','Agric Store') }}</title>
 
   <!-- Bootstrap CSS -->
   <link href="{{ asset('admin/css/bootstrap.min.css') }}" rel="stylesheet">
@@ -23,19 +23,6 @@
   <link href="{{ asset('admin/css/style.css') }}" rel="stylesheet">
   <link href="{{ asset('admin/css/style-responsive.css') }}" rel="stylesheet" />
 
-  <!-- HTML5 shim and Respond.js IE8 support of HTML5 -->
-  <!--[if lt IE 9]>
-      <script src="js/html5shiv.js"></script>
-      <script src="js/respond.min.js"></script>
-      <script src="js/lte-ie7.js"></script>
-    <![endif]-->
-
-    <!-- =======================================================
-      Theme Name: NiceAdmin
-      Theme URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
-      Author: BootstrapMade
-      Author URL: https://bootstrapmade.com
-    ======================================================= -->
 </head>
 
 <body>
@@ -57,7 +44,7 @@
              
             <h3 class="page-header"><i class="fa fa-table"></i> Table</h3>
             <ol class="breadcrumb">
-              <li><i class="fa fa-home"></i><a href="{{ route('legal.home') }}">Home</a></li>
+              <li><i class="fa fa-home"></i><a href="{{ route('index') }}">Home</a></li>
               <li><i class="fa fa-table"></i>Table</li>
               <li><i class="fa fa-th-list"></i>List of Users</li>
             </ol>
@@ -91,13 +78,13 @@
                   <tr>
                     <td>{{ $loop->iteration}}</td>
                     <td>{{ $client->name }}</td>
-                    <td><img src="{{ asset('uploads/pictures/user/'. $client->photo ) }}" style="height:30px; margin-top:-2px;"></td>
+                    <td><img src="@{{ asset('uploads/pictures/user/'. $client->photo ) }}" style="height:30px; margin-top:-2px;"></td>
                     <td>{{ $client->email }}</td>
                     <td>{{ $client->phone }}</td>
                     <td>{{ $client->created_at }}</td>
                     <td>
-                      <a href="{{ route('user.view',['client'=>$client->id]) }}" class="btn btn-primary">View</a>
-                      <a href="{{ route('user.delete',['client'=>$client->id]) }}" class="btn btn-danger delete-confirm">Delete</a>
+                      <a href="{{ route('admin.user.view', ['client' => $client->id]) }}" class="btn btn-primary">View</a>
+                      <a href="{{ route('admin.user.delete', ['client' => $client->id]) }}" class="btn btn-danger delete-confirm">Delete</a>
                     </td>
                   </tr> 
                   </tr>

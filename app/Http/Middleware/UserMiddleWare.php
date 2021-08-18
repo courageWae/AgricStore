@@ -16,7 +16,7 @@ class UserMiddleWare
      */
     public function handle(Request $request, Closure $next)
     {
-        if( auth()->check() && auth()->user()->role()->name == "user") # checks for a user account
+        if( auth()->check() && auth()->user()->role_id == 2) # checks for a user account
         {
             return $next($request);
         }

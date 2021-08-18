@@ -16,7 +16,19 @@
 					<!-- <li><a href="shipping.html" ><i class="fa fa-ship" aria-hidden="true"></i>Shipping</a></li> -->
 				</ul>
 			</div>
-            @endif
+			@elseif(auth()->user() && auth()->user()->role_id == 2)
+			<div class="head-t">
+				<ul class="card">
+					<li><a href="{{ route('user.dashboard') }}" ><i class="fa fa-user" aria-hidden="true"></i>My DASHBOARD</a></li>
+				</ul>
+			</div>
+			@else
+			<div class="head-t">
+				<ul class="card">
+					<li><a href="{{ route('admin.dashboard') }}" ><i class="fa fa-user" aria-hidden="true"></i>My DASHBOARD</a></li>
+				</ul>
+			</div>
+			@endif
 			<!-- <div class="header-ri">
 				<ul class="social-top">
 					<li><a href="#" class="icon facebook"><i class="fa fa-facebook" aria-hidden="true"></i><span></span></a></li>

@@ -1,6 +1,6 @@
-@extends('layouts.web.master')
+@extends('layouts.user.master')
 @section('head')
-   @include('layouts.web.head')
+   @include('layouts.user.head')
 @endsection
 @section('content')
 
@@ -12,7 +12,7 @@
                     <div class="col col-xs-12">
                         <h2>DashBoard</h2>
                         <ol class="breadcrumb">
-                            <li><a href="index-2.html">Home</a></li>
+                            <li><a href="{{ route('index') }}">Home</a></li>
                             <li>Dashboard</li>
                         </ol>
                     </div>
@@ -25,7 +25,7 @@
             <div class="container">
                 <div class="row products-grids">
                     <!-- PACKAGE ONE -->
-                    @include('user.dashBox')
+                    @include('layouts.user.dashBox')
                     <div class="col col-lg-8" style ="padding-left:20px;">
                       <h2>YOUR DETAILS</h2><hr>
                       <h3>Full Name</h3>

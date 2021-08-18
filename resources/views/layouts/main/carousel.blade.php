@@ -7,15 +7,15 @@
       </ol>
       <div class="carousel-inner" role="listbox">
         <div class="item active">
-         <a href="kitchen.html"> <img class="first-slide" src="{{ asset('assets/images/ba.jpg') }}" alt="First slide"></a>
+         <a href="#"> <img class="first-slide" src="{{ asset('assets/images/slide_1.jpg') }}" alt="First slide"></a>
 
         </div>
         <div class="item">
-         <a href="care.html"> <img class="second-slide " src="{{ asset('assets/images/ba1.jpg') }}" alt="Second slide"></a>
+         <a href="#"> <img class="second-slide " src="{{ asset('assets/images/slide_2.jpg') }}" alt="Second slide"></a>
 
         </div>
         <div class="item">
-          <a href="hold.html"><img class="third-slide " src="{{ asset('assets/images/ba2.jpg') }}" alt="Third slide"></a>
+          <a href="#"><img class="third-slide " src="{{ asset('assets/images/slide_3.jpg') }}" alt="Third slide"></a>
 
         </div>
       </div>

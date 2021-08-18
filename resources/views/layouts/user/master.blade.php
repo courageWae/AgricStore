@@ -10,7 +10,7 @@
         <!-- start preloader -->
         <div class="preloader">
             <div class="preloader-inner">
-                <h3>Nub</h3>
+                <h3>Agric Store</h3>
             </div>
         </div>
         <!-- end preloader -->

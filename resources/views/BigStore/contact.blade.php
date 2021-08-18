@@ -3,7 +3,7 @@
 <html>
 @include('layouts.main.script')
 <body>
-<a href="offer.html"><img src="images/download.png" class="img-head" alt=""></a>
+<a href="#"><img src="images/download.png" class="img-head" alt=""></a>
 
 <!-- HEADER SECTION -->
 @include('layouts.main.header')
@@ -13,7 +13,7 @@
 <div class="banner-top">
 	<div class="container">
 		<h3 >Contact</h3>
-		<h4><a href="{{ route('home') }}">Home</a><label>/</label>Contact</h4>
+		<h4><a href="{{ route('index') }}">Home</a><label>/</label>Contact</h4>
 		<div class="clearfix"> </div>
 	</div>
 </div>
@@ -30,35 +30,53 @@
 				</div>
 		</div>
 		<div class=" contact-w3">	
-			<div class="col-md-5 contact-right">	
+			<div class="col-md-6 contact-right">	
 				<img src="images/cac.jpg" class="img-responsive" alt="">
-				<iframe src="https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d2482.432383990807!2d0.028213999961443994!3d51.52362882484525!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sin!4v1423469959819" style="border:0"></iframe>
+				<iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d15883.290319819107!2d-0.1963456!3d5.59321665!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sgh!4v1629162684868!5m2!1sen!2sgh" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
 			</div>
-			<div class="col-md-7 contact-left">
+			<div class="col-md-6 contact-left">
 				<h4>Contact Information</h4>
-				<p> Nemo enim ipsam voluptatem quia voluptas sit aspernatur 
-				aut odit aut fugit, sed quia consequuntur magni dolores eos
-				qui ratione voluptatem sequi nesciunt. Neque porro quisquam 
-				est, qui dolorem ipsum quia dolor sit amet, consectetur</p>
+				<p> We are always at your service. Contact us with the following credentials</p>
 				<ul class="contact-list">
-					<li> <i class="fa fa-map-marker" aria-hidden="true"></i> 756 Global Place, New York.</li>
-					<li><i class="fa fa-envelope" aria-hidden="true"></i><a href="mailto:example@mail.com">mail@example.com</a></li>
+					<li> <i class="fa fa-map-marker" aria-hidden="true"></i> 12k Street, 45 Las palmas Ghana.</li>
+					<li><i class="fa fa-envelope" aria-hidden="true"></i><a href="">info@agricstore.com</a></li>
 					<li> <i class="fa fa-phone" aria-hidden="true"></i>+123 2222 222</li>
 				</ul>
 				<div id="container">
 					<!--Horizontal Tab-->
 					<div id="parentHorizontalTab">
-						<ul class="resp-tabs-list hor_1">
+						<!-- <ul class="resp-tabs-list hor_1">
 							<li><i class="fa fa-envelope" aria-hidden="true"></i></li>
 							<li> <i class="fa fa-map-marker" aria-hidden="true"></i> </span></li>
 							<li> <i class="fa fa-phone" aria-hidden="true"></i></li>
-						</ul>
+						</ul> -->
+						@if(session()->has('message'))
+                            <div class="alert {{session('alert') ?? 'alert-success'}}">
+                                {{ session('message') }}
+                            </div>
+                        @endif
 						<div class="resp-tabs-container hor_1">
 							<div>
-								<form action="#" method="post">
-									<input type="text" value="Name" name="Name" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Name';}" required="">
-									<input type="email" value="Email" name="Email" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Email';}" required="">
-									<textarea name="Message..." onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Message...';}" required="">Message...</textarea>
+								<form action="{{ route('store') }}" method="post">
+								@csrf
+									<input type="text" value="Name" name="name" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'name';}" class = "form-control @error('name') is-invalid @enderror" required>
+									@error('name')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+									<input type="email" value="Email" name="email" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'email';}" class = "form-control @error('email') is-invalid @enderror" required>
+									@error('name')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+									<textarea name="message" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'message';}" class = "form-control @error('message') is-invalid @enderror"required>Message Here</textarea>
+									@error('message')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
 									<input type="submit" value="Submit" >
 								</form>
 							</div>

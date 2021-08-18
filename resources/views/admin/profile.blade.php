@@ -21,32 +21,18 @@
   <link href="../admin/css/font-awesome.min.css" rel="stylesheet" />
   <!-- Custom styles -->
   <link href="../admin/css/style.css" rel="stylesheet">
-  <link href="../admin/css/style-responsive.css" rel="stylesheet" />
 
-  <!-- HTML5 shim and Respond.js IE8 support of HTML5 -->
-  <!--[if lt IE 9]>
-      <script src="js/html5shiv.js"></script>
-      <script src="js/respond.min.js"></script>
-      <script src="js/lte-ie7.js"></script>
-    <![endif]-->
-
-    <!-- =======================================================
-      Theme Name: NiceAdmin
-      Theme URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
-      Author: BootstrapMade
-      Author URL: https://bootstrapmade.com
-    ======================================================= -->
 </head>
 
 <body>
   <!-- container section start -->
   <section id="container" class="">
     <!--header start-->
-    @include('layouts/admin/header')
+    @include('layouts.admin.header')
     <!--header end-->
 
     <!--sidebar start-->
-    @include('layouts/admin/sidebar')
+    @include('layouts.admin.sidebar')
     <!--sidebar end-->
 
     <!--main content start-->
@@ -56,7 +42,7 @@
           <div class="col-lg-12">
             <h3 class="page-header"><i class="fa fa-user-md"></i> Profile</h3>
             <ol class="breadcrumb">
-              <li><i class="fa fa-home"></i><a href="index.html">Home</a></li>
+              <li><i class="fa fa-home"></i><a href="{{ route('index') }}">Home</a></li>
               <li><i class="icon_documents_alt"></i>Pages</li>
               <li><i class="fa fa-user-md"></i>Profile</li>
             </ol>
@@ -70,12 +56,12 @@
                 <div class="col-lg-2 col-sm-2">
                   <h4>{{ Auth::user()->name }}</h4>
                   <div class="follow-ava">
-                    <img src="{{ asset('uploads/pictures/user/'.Auth::user()->photo ) }}" alt>
+                    <img src="{{ asset('storage/'.Auth::user()->photo ) }}" alt>
                   </div>
                   <h6>Administrator</h6>
                 </div>
                 <div class="col-lg-4 col-sm-4 follow-info">
-                  <p>Hello I’m {{ Auth::user()->name }}, Lexicon Support Adminstrator</p>
+                  <p>Hello I’m {{ Auth::user()->name }}, An Adminstrator from THE AGRIC STORE</p>
                   <p>{{ Auth::user()->email }}</p>
                   <!-- <p><i class="fa fa-twitter">jenifertweet</i></p> -->
                   <h6>
@@ -123,15 +109,15 @@
                 <ul class="nav nav-tabs">
                   <li>
                     <a data-toggle="tab" href="#profile">
-                                          <i class="icon-user"></i>
-                                          Profile
-                                      </a>
+                      <i class="icon-user"></i>
+                        Profile
+                    </a>
                   </li>
                   <li class="">
                     <a data-toggle="tab" href="#edit-profile">
-                                          <i class="icon-envelope"></i>
-                                          Edit Profile
-                                      </a>
+                      <i class="icon-envelope"></i>
+                        Edit Profile
+                    </a>
                   </li>
                 </ul>
               </header>
@@ -145,21 +131,21 @@
                       </div>
                       <div class="panel-body bio-graph-info">
                         <h1><strong>My Profile</strong></h1>
-                        <div class="row">
+                        <div class="row">        
                           <div class="bio-row">
-                            <p><span>First Name </span>: {{ $str[0] }} </p>
+                            <p><span>Full Name </span>:  <b> {{ Auth::user()->name }} </b></p>
                           </div>
                           <div class="bio-row">
-                            <p><span>Last Name </span>: {{ $str[1] }}</p>
+                            <p><span>User Name </span>:  <b> {{ Auth::user()->user_name }} </b></p>
                           </div>
                           <div class="bio-row">
                             <p><span>Role </span>: Administrator</p>
                           </div>
                           <div class="bio-row">
-                            <p><span>Email </span>: {{ Auth::user()->email }}</p>
+                            <p><span>Email </span>: <b>{{ Auth::user()->email }}</b></p>
                           </div>
                           <div class="bio-row">
-                            <p><span>Mobile </span>: {{ Auth::user()->phone }}</p>
+                            <p><span>Mobile </span>: <b> {{ Auth::user()->phone }} </b></p>
                           </div>
                           <div class="bio-row">
                             <p><span>Country </span>: Ghana</p>
@@ -172,6 +158,7 @@
                       </div>
                     </section>
                   </div>
+
                   <!-- edit-profile -->
                   <div id="edit-profile" class="tab-pane">
                     <section class="panel">
@@ -184,14 +171,26 @@
                         <h1> Profile Info</h1>
 
                         <!-- FORM STARTS -->
-                        <form class="form-horizontal" method="post" action="{{ route('admin.profile.update',['admin'=>Auth::user()->id]) }}">
-                           {{ csrf_field() }}
+                        <form class="form-horizontal" method="post" action="{{ route('admin.profile.update', ['admin' => Auth::user()->id]) }}" enctype= "multipart/form-data">
+                           @csrf
                            @method('PATCH')
                           <div class="form-group">
                             <label class="col-lg-2 control-label">Full Name</label>
                             <div class="col-lg-6">
                               <input type="text" class="form-control" name="name" value="{{ Auth::user()->name }}" required>
                                 @error('name')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                          </div>
+
+                          <div class="form-group">
+                            <label class="col-lg-2 control-label">User Name</label>
+                            <div class="col-lg-6">
+                              <input type="text" class="form-control" name="user_name" value="{{ Auth::user()->user_name }}" required>
+                                @error('user_name')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -239,6 +238,18 @@
                             <label class="col-lg-2 control-label">Confirm Password</label>
                             <div class="col-lg-6">
                               <input type="password" class="form-control" name="password_confirmation" required>
+                            </div>
+                          </div>
+
+                          <div class="form-group">
+                            <label class="col-lg-2 control-label">Photo</label>
+                            <div class="col-lg-6">
+                              <input type="file" class="form-control" name="photo">
+                              @error('photo')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                           </div>
 

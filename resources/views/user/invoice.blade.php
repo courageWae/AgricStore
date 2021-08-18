@@ -1,4 +1,15 @@
-@extends('master_invoice')
+@extends('layouts.invoice.master_invoice')
+@inject("invoice", "App\Models\Invoice")
+
+@php
+
+$subtotal = $user_product->quantity * $user_product->price ;
+$discount = ($user_product->discount / 100) * $user_product->price ;
+$discount = $discount * $user_product->quantity;
+$new_invoice = $invoice->where("user_product_id", $user_product->id)->value("id");
+$new_invoice = str_pad($new_invoice, "4", "0", STR_PAD_LEFT);
+
+@endphp
 
 @section('user_name',Auth::user()->name)
 
@@ -6,13 +17,24 @@
 
 @section('user_email',Auth::user()->email)
 
-@section('package_name',strtoupper($category_alias->package->name))
+@section('invoice_number', $new_invoice)
 
-@section('category_name',strtoupper($category_alias->name))
+@section('item_name',strtoupper($user_product->product_name))
 
-@section('category_price',$category_alias->price)
+@section('category_name',strtoupper($user_product->category->name))
 
-@section('category_price_2',$category_alias->price)
+@section('item_price',$user_product->price)
+
+@section('item_quantity',$user_product->quantity)
+
+@section('item_total_price', $subtotal)
+
+@section('item_total_price_2', $subtotal)
+
+@section('item_discount', $discount)
+
+@section('total_price', $user_product->total_price)
+
 
 @section('print_button')
 <div style="float:right" class = "no-print";>

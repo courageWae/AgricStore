@@ -1,6 +1,6 @@
-@extends('layouts.web.master')
+@extends('layouts.user.master')
 @section('head')
-   @include('layouts.web.head')
+   @include('layouts.user.head')
 @endsection
 @section('content')
 
@@ -11,7 +11,7 @@
                     <div class="col col-xs-12">
                         <h2>DashBoard</h2>
                         <ol class="breadcrumb">
-                            <li><a href="{{ route('legal.home') }}">Home</a></li>
+                            <li><a href="{{ route('index') }}">Home</a></li>
                             <li>Dashboard</li>
                         </ol>
                     </div>
@@ -26,7 +26,7 @@
             <div class="container">
                 <div class="row products-grids">
                     <!-- PACKAGE ONE -->
-                    @include('user.dashBox')
+                    @include('layouts.user.dashBox')
                     <div class="col col-lg-8" style ="padding-left:20px;">
                      @if(session()->has('message'))
                         <div class="alert {{session('alert') ?? 'alert-success'}}">
@@ -45,7 +45,7 @@
                                      <div class="card">
                             <!-- Tab panes -->
                             <div class="card-body">
-                                <form class="form-horizontal form-material" method="post" action="{{ route('user.profile.update',['alias'=>Auth::user()->alias]) }}" enctype="multipart/form-data">
+                                <form class="form-horizontal form-material" method="post" action="{{ route('user.profile.update',['client'=> Auth::user()->id]) }}" enctype="multipart/form-data">
                                   {{ csrf_field() }}
                                    @method('PATCH')
                                     <div class="form-group">
@@ -111,10 +111,7 @@
 
                                     <div class="form-group">
                                         <div class="col-sm-12">
-                                            <button class="btn btn-success">
-                                               <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-bar-up" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                               <path fill-rule="evenodd" d="M8 10a.5.5 0 0 0 .5-.5V3.707l2.146 2.147a.5.5 0 0 0 .708-.708l-3-3a.5.5 0 0 0-.708 0l-3 3a.5.5 0 1 0 .708.708L7.5 3.707V9.5a.5.5 0 0 0 .5.5zm-7 2.5a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 0 1h-13a.5.5 0 0 1-.5-.5z"/>
-                                               </svg>&nbsp&nbspUpdate Profile</button>
+                                            <button class="btn btn-success" type="submit">Update Profile</button>
                                         </div>
                                     </div>
                                 </form>

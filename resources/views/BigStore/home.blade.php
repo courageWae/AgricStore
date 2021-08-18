@@ -2,7 +2,7 @@
 <html>
 @include('layouts.main.script')
 <body>
-<a href="offer.html"><img src="{{ asset('assets/images/download.png') }}" class="img-head" alt=""></a>
+<a href="#"><img src="{{ asset('assets/images/download.png') }}" class="img-head" alt=""></a>
 
 <!-- HEADER SECTION -->
 @include('layouts.main.header')
@@ -78,21 +78,28 @@
 							<div class="col-md-3 pro-1">
 								<div class="col-m">
 								<a href="#" data-toggle="modal" data-target="#myModal21" class="offer-img">
-										<img src="{{ asset('assets/images/of19.png') }}" class="img-responsive" alt="">
+										<img src="{{ asset('storage/'.$special_offer->photo) }}" class="img-responsive"  style = "width:250px;height:200px;" alt="">
 									</a>
 									<div class="mid-1">
 										<div class="women">
-											<h6><a href="single.html">Clips</a>(1 pack)</h6>
+											<h6><a href="#">{{ $special_offer->product_name }}</a> ({{ $special_offer->weight }}Kg)</h6>
 										</div>
 										<div class="mid-2">
-											<p ><label>$7.00</label><em class="item_price">$6.00</em></p>
+											<p ><label>&cent {{ $special_offer->price }}</label><em class="item_price">&cent {{ $special_offer->new_price }}</em></p>
 											  <div class="block">
 												<div class="starbox small ghosting"> </div>
 											</div>
 											<div class="clearfix"></div>
 										</div>
 											<div class="add">
-										   <button class="btn btn-danger my-cart-btn my-cart-b" data-id="1" data-name="product 1" data-summary="summary 1" data-price="6.00" data-quantity="1" data-image="images/of20.png">Add to Cart</button>
+										@if(auth()->guest() || auth()->user()->role->id == 2)												
+											@if(session()->has('status'))
+											<a class="btn btn-danger my-cart-btn my-cart-b" href = "{{ route('user.add_to_cart', ['product_id' => $special_offer->id]) }}">{{ session('status') }}</a>
+											@else
+											<a class="btn btn-danger my-cart-btn my-cart-b" href = "{{ route('user.add_to_cart', ['product_id' => $special_offer->id]) }}">{{ session('status') }}</a>
+                                            @endif
+									    @endif
+										  
 										</div>
 									</div>
 								</div>

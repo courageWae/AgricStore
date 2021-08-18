@@ -47,7 +47,7 @@
             @endif
             <h3 class="page-header"><i class="fa fa-table"></i> Table</h3>
             <ol class="breadcrumb">
-              <li><i class="fa fa-home"></i><a href="{{ route('legal.home') }}">Home</a></li>
+              <li><i class="fa fa-home"></i><a href="{{ route('index') }}">Home</a></li>
               <li><i class="fa fa-table"></i>Table</li>
               <li><i class="fa fa-th-list"></i>List of Invoices</li>
             </ol>
@@ -60,8 +60,9 @@
               <header class="panel-heading">
                 List of Invoices
               </header>
-               @inject('user','App\User')
-               @inject('category','App\Category')
+               @inject('user','App\Models\User')
+               @inject('user_product','App\Models\UserProduct')
+               @inject('category', 'App\Models\Category')
               <table class="table table-striped table-advance table-hover">
                 <tbody>
                   <tr>
@@ -72,35 +73,45 @@
                     <th>Photo of Client</th>
                     <th>Package Name</th>
                     <th>Category</th>
-                    <th>Price</th>
                     <th>Total Price</th>
-                    <th>Status</th>
+                    <th>Payment Status</th>
                     <th>Created At</th>
                     <th>Paid On</th>
+                    <th>Action</th>
                   </tr>
-                  @foreach($invoice as $invoice)
-                    @php($user = $user->find($invoice->user_id))
-                    @php($category = $category->find($invoice->category_id))
+                  @foreach($invoices as $invoice)
+                    @php
+                      $client = $user->find($invoice->user_id);
+                      $userProduct = $user_product->find($invoice->user_product_id);
+                      $cat = $category->where("id", $userProduct->category_id)->value("name");
+                    @endphp  
                   <tr>
                     <td>{{ $loop->iteration }}</td>
-                    <td>{{ $user->name }}</td>
-                    <td>{{ $user->email }}</td>
-                    <td>{{ $user->phone }}</td>
-                    <td><img src="{{ asset('uploads/pictures/user/'.$user->photo ) }}" style="height:30px; margin-top:-2px;">
+                    <td>{{ $client->name }}</td>
+                    <td>{{ $client->email }}</td>
+                    <td>{{ $client->phone }}</td>
+                    <td><img src="{{ asset('storage/'.$user->photo ) }}" style="height:30px; margin-top:-2px;">
                     </td>
-                    <td>{{ $category->package->name }}</td>
-                    <td>{{ $category->name }}</td>
-                    <td>{{ $category->price }}</td>
-                    <td>{{ $invoice->total }}</td>
+                    <td>{{ $userProduct->product_name }}</td>
+                    <td style = "color:black">{{ strtoupper($cat) }}</td>
+                    <td>{{ $userProduct->total_price }}</td>
                     <td>
-                      @if($invoice->status == 'Unpaid')
+                      @if($invoice->status == 'pending')
                         <span style="color:red; font-weight:bold;">{{ $invoice->status }}</span>
                       @else
                         <span style="color:green; font-weight:bold;">{{ $invoice->status }}</span>
                       @endif
                       </td>
-                    <td>{{ $invoice->created_at->toDateString() }}</td>
-                    <td>{{ $invoice->updated_at->toDateString() }}</td>
+                    <td>{{ $invoice->created_at->toFormattedDateString() }}</td>
+                    @if($invoice->status !== 'pending')
+                    <td>{{ $invoice->updated_at->toFormattedDateString() }}</td>
+                    @else
+                    <td> -----</td>
+                    @endif
+                    <td>
+                      <a href="{{ route('admin.view.invoices',['invoice' => $invoice->id]) }}" class="btn btn-primary">View</a>
+                      <a href="{{ route('admin.delete.invoices',['invoice' => $invoice->id]) }}" class="btn btn-danger delete-confirm">Delete</a>   
+                    </td>
                   </tr>
                   @endforeach
                 </tbody>
@@ -125,6 +136,23 @@
   <script src="{{ asset('admin/js/scripts.js') }}"></script>
 
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+  <script>
+  $('.delete-confirm').on('click', function (event) {
+    event.preventDefault();
+    const url = $(this).attr('href');
+    swal({
+        title: 'Are you sure?',
+        text: 'This Invoice will be permanently deleted',
+        icon: 'warning',
+        buttons: ["Cancel", "Yes!"],
+    }).then(function(value) {
+        if (value) {
+            window.location.href = url;
+        }
+    });
+});
+</script>
 
 </body>
 

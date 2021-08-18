@@ -3,9 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Equipment;
-use App\Models\Fertilizer;
-use App\Models\FoodStuff;
+use App\Models\Product;
+use App\Models\UserProduct;
 
 class BigStoreController extends Controller
 {
@@ -21,11 +20,8 @@ class BigStoreController extends Controller
 
     private function specialOffer()
     {
-        $fertilizer = Fertilizer::whereNotNull("discount")->get()->toArray();
-        $equipment = Equipment::whereNotNull("discount")->get()->toArray();
-        $foodStuff = FoodStuff::whereNotNull("discount")->get()->toArray();
-        $special_offer = array_merge($fertilizer, $equipment, $foodStuff) ;
-        return $special_offer ;
+        $products = Product::where("discount", ">", 0)->get();
+        return $products ;
     }
 
 }

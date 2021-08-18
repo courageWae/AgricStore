@@ -46,7 +46,7 @@
           <div class="col-lg-12">
             <h3 class="page-header"><i class="fa fa-file-text-o"></i> Administrator </h3>
             <ol class="breadcrumb">
-              <li><i class="fa fa-home"></i><a href="{{ route('legal.home') }}">Home</a></li>
+              <li><i class="fa fa-home"></i><a href="{{ route('index') }}">Home</a></li>
               <li><i class="icon_document_alt"></i>Forms</li>
               <li><i class="fa fa-file-text-o"></i>New Administrator</li>
             </ol>
@@ -81,6 +81,18 @@
                       <div class="col-lg-10">
                         <input name="name" type="text" class="form-control @error('name') is-invalid @enderror" required/>
                           @error('name')
+                            <span class="invalid-feedback" role="alert">
+                              <strong>{{ $message }}</strong>
+                            </span>
+                          @enderror
+                      </div>
+                    </div>
+
+                    <div class="form-group ">
+                      <label for="user_name" class="control-label col-lg-2">User Name <span class="required">*</span></label>
+                      <div class="col-lg-10">
+                        <input name="user_name" type="text" class="form-control @error('user_name') is-invalid @enderror" required/>
+                          @error('user_name')
                             <span class="invalid-feedback" role="alert">
                               <strong>{{ $message }}</strong>
                             </span>
@@ -191,6 +203,7 @@
   <script src="{{ asset('admin/js/form-component.js') }}"></script>
   <!-- custome script for all page -->
   <script src="{{ asset('admin/js/scripts.js') }}"></script>
+
 
 
 </body>

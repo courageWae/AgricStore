@@ -16,13 +16,13 @@ class AdminMiddleWare
      */
     public function handle(Request $request, Closure $next)
     {
-        if( auth()->check() && auth()->user()->name == "admin") # checks for a user account
+        if( auth()->check() && auth()->user()->role->name === "admin") # checks for a user account
         {
             return $next($request);
         }
         else
         {
-            return route('login') ;
+            return redirect()->route('login') ;
         }
     }
 }

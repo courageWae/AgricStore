@@ -3,11 +3,11 @@
   <ul class="list-group list-group-flush">
     <li class="list-group-item">
     	<center>
-            @if(Auth::user()->photo == null)
-             <img src="{{ asset('assets/images/user.png' ) }}" width="60" height="60" style="border-radius: 30px;">
+            @if(empty(auth()->user()->photo))
+             <img src="{{ asset('assets/images/profile.png' ) }}" width="60" height="60" style="border-radius: 30px;">
             @else
-    		<a href="{{ asset('uploads/pictures/user/'. Auth::user()->photo ) }}" target="blank">
-                <img class="card-img-top" src="@{{ asset('uploads/pictures/user/'.Auth::user()->photo ) }}" alt="img" width="60" height="60" style="border-radius: 30px;">
+    	    	<a href="{{ asset('storage/'.Auth::user()->photo ) }}" target="blank">
+                <img class="card-img-top" src="{{ asset('storage/'.Auth::user()->photo ) }}" alt="img" width="100px" height="100px" style="border-radius:70px;">
             </a>
             @endif
             <p>
@@ -16,14 +16,14 @@
             </p>
     	</center>
     </li>
-    <a href="#">
+    <!-- <a href="#">
         <li class="list-group-item" style="border-left-color:#f56942;border-left-width:3px;"onMouseOver="this.style.backgroundColor='#cfcbca'" onMouseOut="this.style.backgroundColor=''">
-          Summary
+          //Summary
         </li>
-    </a>
-    <a href="#">
+    </a> -->
+    <a href="{{ route('user.orders') }}">
         <li class="list-group-item" style="border-left-color:#f56942;border-left-width:3px;"onMouseOver="this.style.backgroundColor='#cfcbca'" onMouseOut="this.style.backgroundColor=''">
-          Predictor Results
+          My Orders
         </li>
     </a><br>
     <div style="font-weight: bolder;">Profile Details</div>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
+use App\Models\UserProduct;
 use Illuminate\Support\Str;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
@@ -44,9 +45,15 @@ class RegisterController extends Controller
 
     public function redirectTo() # redirect user based on role name.
     {
-        if( auth()->check() && auth()->user()->role->name == "user") return route("user.dashboard") ;
-
-        if( auth()->check() && auth()->user()->role->name == "admin") return route("admin.dashboard") ;
+        if( auth()->check() && auth()->user()->role_id === 2)
+        {
+            $this->storeUserId();
+            return route("user.orders") ;
+        }
+        else
+        {
+            return route("admin.dashboard");
+        }
     }
 
     /**
@@ -61,6 +68,7 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'user_name' => ['required', 'string', 'min:5', 'max:10'],
+            'phone' => ['required', 'numeric', 'min:10'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'role_id' => ['required']
         ]);
@@ -80,7 +88,17 @@ class RegisterController extends Controller
             'user_name' => $data['user_name'],
             'alias' => Str::of( $data['name'] . " " . $data['user_name'])->slug("-"),
             'role_id' => $data['role_id'] ,
+            'phone' => $data['phone'],
             'password' => Hash::make($data['password']),
         ]);
+    }
+
+    private function storeUserId()
+    {
+        if(request()->session()->has("rand"))
+        {
+            $user_product = UserProduct::where("guest_id", request()->session()->get("rand"))->get();
+            $user_product->update("user_id", auth()->user()->id);
+        }
     }
 }

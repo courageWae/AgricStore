@@ -1,6 +1,6 @@
-@extends('layouts.web.master')
+@extends('layouts.user.master')
 @section('head')
-   @include('layouts.web.head')
+   @include('layouts.user.head')
 @endsection
 @section('content')
 
@@ -12,7 +12,7 @@
                     <div class="col col-xs-12">
                         <h2>DashBoard</h2>
                         <ol class="breadcrumb">
-                            <li><a href="{{ route('legal.home') }}">Home</a></li>
+                            <li><a href="{{ route('index') }}">Home</a></li>
                             <li>Edit Email</li>
                         </ol>
                     </div>
@@ -25,7 +25,7 @@
             <div class="container">
                 <div class="row products-grids">
                     <!-- PACKAGE ONE -->
-                    @include('user.dashBox')
+                    @include('layouts.user.dashBox')
                     <div class="col col-lg-8" style ="padding-left:20px;">
                       @if(session()->has('message'))
                         <div class="alert {{session('alert') ?? 'alert-success'}}">
@@ -33,10 +33,10 @@
                         </div>
                       @endif   
                       <h2>Change Email</h2><hr>
-                      <form method='post' action="{{ route('user.email.update',['alias'=>Auth::user()->alias]) }}">
+                      <form method='post' action="@{{ route('user.email.update',['client'=>Auth::user()->id]) }}">
                         @csrf
                         @method('PATCH')
-                        <h4>Email Address</h4>
+                        <h4>Enter New Email Address</h4>
                         <div class="well well-sm">
                           <div class="form-group">
                             <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" required>

@@ -27,8 +27,22 @@
 						</ul>
 					</div>
 				</nav>
-				<div class="cart" >
-					<span class="fa fa-shopping-cart my-cart-icon"><span class="badge badge-notify my-cart-badge"></span></span>
-				</div>
+				@php($count = App\Models\UserProduct::where("guest_id", session()->get("rand"))->count())
+                
+				@if(auth()->user() && auth()->user()->role_id !== 1 )
+				<a type="submit" class="btn btn-default" href = "{{ route('user.orders') }}">
+                    <span class="fa fa-shopping-cart"></span>&nbsp&nbsp
+                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                        {{ $count }}
+                    </span>
+                </a>
+				@else
+				<a type="submit" class="btn btn-default" href = "{{ route('login') }}">
+                    <span class="fa fa-shopping-cart"></span>&nbsp&nbsp
+                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                        {{ $count }}
+                    </span>
+                </a>
+				@endif
 				<div class="clearfix"></div>
 </div>
