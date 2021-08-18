@@ -123,14 +123,6 @@
         </div>
         <!--/.row-->
         <div class="row">
-          <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
-            <div class="info-box brown-bg">
-              <i class="fa fa-user"></i>
-              <div class="count">@{{ $user->Admin()->count() }}</div>
-              <div class="title">Number of Administrators</div>
-            </div>
-            <!--/.info-box-->
-          </div>
 
           <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12">
           <h4><b>Messages</b></h4>
