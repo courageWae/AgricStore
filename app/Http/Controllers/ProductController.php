@@ -17,13 +17,13 @@ class ProductController extends Controller
     {
         return view('BigStore.equipments')->with(["equipments" => Product::Equipment()->get(), "popular_equipment" => $this->popularEquipmentProducts()]);
     }
-    
+
     public function foodStuff()
     {
         return view('BigStore.foodStuffs')->with(["food_stuffs" => Product::FoodStuff()->get(), "popular_foodStuff" => $this->popularFoodStuffProducts()]);
     }
 
-    
+
 
     public function add_product()
     {
@@ -39,23 +39,28 @@ class ProductController extends Controller
                 'category' => ['required']
             ]);
 
+
+            $file = request()->file('photo');
+            $filename = $file->getClientOriginalName(); //getting image extension
+            $file->move(public_path().'/uploads/reports', $filename);
+            request()->photo = $filename;
+
             $category_id = Category::where("name", request()->category)->value("id"); # get category id.
-            $path = request()->file("photo")->store('product', 'public'); # store in public folder in the product directory
-            
+
             #caluclating discount.
             $discount = ( request()->discount / 100 ) * request()->price;
             $new_price = request()->price - $discount ;
-            $product = new Product([  # create new instance 
+            $product = new Product([  # create new instance
                 "product_name" => request()->product_name,
                 "price" => request()->price,
                 "new_price" => $new_price,
                 "weight" => request()->weight,
                 "category_id" => $category_id,
                 "discount" => request()->discount,
-                'photo' => $path 
+                'photo' => request()->photo
             ]);
             $product->save();
-              
+
             return redirect()->back()->with(['message' => 'New Product Created Successfully', 'alert' => 'alert-success']);
         }
         else
@@ -75,7 +80,7 @@ class ProductController extends Controller
     }
 
     public function product_update( Product $product )
-    {  
+    {
         request()->validate([ # validate incoming request
             'product_name' => ['required', 'string', 'max:255'],
             'price' => ['numeric'],
@@ -85,7 +90,7 @@ class ProductController extends Controller
         ]);
 
         $category_id = Category::where("name", request()->category)->value("id"); # get category id.
-    
+
         $product->update([
             "product_name" => request()->product_name,
             "price" => request()->price,
@@ -100,8 +105,8 @@ class ProductController extends Controller
             $path = request()->file("photo")->store('product', 'public'); # store in public folder in the product directory
             $product->update([ "photo" => $path]);
         }
-              
-        return redirect()->back()->with(['message' => 'Product Updated Successfully', 'alert' => 'alert-success']); 
+
+        return redirect()->back()->with(['message' => 'Product Updated Successfully', 'alert' => 'alert-success']);
     }
 
     public function product_delete( Product $product)

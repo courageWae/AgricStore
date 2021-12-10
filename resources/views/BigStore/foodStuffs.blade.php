@@ -27,11 +27,11 @@
 							<div class="col-md-3 pro-1">
 								<div class="col-m">
 									<a href="#" data-toggle="modal" data-target="#myModal11">
-										<img src="{{ asset('storage/'.$popular->photo) }}" class="img-responsive"  style = "width:250px;height:200px;" alt="">
+										<img src="{{ asset('/uploads/reports/'.$popular->photo) }}" class="img-responsive"  style = "width:250px;height:200px;" alt="">
 									</a>
 									<div class="mid-1">
 										<div class="women">
-											<h6><a href="#">{{ $popular->product_name }}</a> ({{ $popular->weight }}kg)</h6>							
+											<h6><a href="#">{{ $popular->product_name }}</a> ({{ $popular->weight }}kg)</h6>
 										</div>
 										<div class="mid-2">
 											<p ><label>&cent {{ $popular->price }}</label><em class="item_price">&cent {{ $popular->new_price }}</em></p>
@@ -40,7 +40,7 @@
 											  </div>
 											<div class="clearfix"></div>
 										</div>
-										@if(auth()->guest() || auth()->user()->role->id == 2)												
+										@if(auth()->guest() || auth()->user()->role->id == 2)
 											@if(session()->has('status') && session()->get("status") == $popular->id)
 										   <a class="btn btn-danger my-cart-btn my-cart-b" href = "{{ route('user.add_to_cart', ['product_id' => $popular->id]) }}">Added to Cart</a>
                                             @else
@@ -54,7 +54,7 @@
 				            <h4>Not Available</h4>
 				            @endforelse
 				</div>
-		
+
 				@endisset
 				<div class="clearfix"></div>
 			</div>
@@ -78,11 +78,11 @@
 							<div class="col-md-3 pro-1">
 								<div class="col-m">
 									<a href="#" data-toggle="modal" data-target="#myModal11">
-										<img src="{{ asset('storage/'.$food_stuff->photo) }}" class="img-responsive" style = "width:250px;height:200px;" alt="">
+										<img src="{{ asset('/uploads/reports/'.$food_stuff->photo) }}" class="img-responsive" style = "width:250px;height:200px;" alt="">
 									</a>
 									<div class="mid-1">
 										<div class="women">
-											<h6><a href="#">{{ $food_stuff->product_name }}</a> ({{ $food_stuff->weight }}kg)</h6>							
+											<h6><a href="#">{{ $food_stuff->product_name }}</a> ({{ $food_stuff->weight }}kg)</h6>
 										</div>
 										<div class="mid-2">
 											<p ><label>&cent {{ $food_stuff->price }}</label><em class="item_price">&cent {{ $food_stuff->new_price }}</em></p>
@@ -91,7 +91,7 @@
 											  </div>
 											<div class="clearfix"></div>
 										</div>
-										@if(auth()->guest() || auth()->user()->role->id == 2)												
+										@if(auth()->guest() || auth()->user()->role->id == 2)
 										@if(session()->has('status') && session()->get("status") == $food_stuff->id)
 										   <a class="btn btn-danger my-cart-btn my-cart-b" href = "{{ route('user.add_to_cart', ['product_id' => $food_stuff->id]) }}">Added to Cart</a>
                                             @else
@@ -105,10 +105,10 @@
 				            <h4>Sorry! No product to display. Come back in a while</h4>
 				            @endforelse
 				</div>
-				
+
 				@endisset
-			
-				      
+
+
 		</div>
 	</div>
 
@@ -118,6 +118,6 @@
 
 
  <!-- JAVASCRIPT FILES -->
- @include('layouts.main.otherScripts')			
+ @include('layouts.main.otherScripts')
 </body>
 </html>
