@@ -78,7 +78,7 @@
 							<div class="col-md-3 pro-1">
 								<div class="col-m">
 								<a href="#" data-toggle="modal" data-target="#myModal21" class="offer-img">
-										<img src="{{ asset('storage/'.$special_offer->photo) }}" class="img-responsive"  style = "width:250px;height:200px;" alt="">
+										<img src="{{ asset('/uploads/reports/'.$special_offer->photo) }}" class="img-responsive"  style = "width:250px;height:200px;" alt="">
 									</a>
 									<div class="mid-1">
 										<div class="women">
@@ -92,14 +92,14 @@
 											<div class="clearfix"></div>
 										</div>
 											<div class="add">
-										@if(auth()->guest() || auth()->user()->role->id == 2)												
+										@if(auth()->guest() || auth()->user()->role->id == 2)
 											@if(session()->has('status'))
 											<a class="btn btn-danger my-cart-btn my-cart-b" href = "{{ route('user.add_to_cart', ['product_id' => $special_offer->id]) }}">{{ session('status') }}</a>
 											@else
 											<a class="btn btn-danger my-cart-btn my-cart-b" href = "{{ route('user.add_to_cart', ['product_id' => $special_offer->id]) }}">{{ session('status') }}</a>
                                             @endif
 									    @endif
-										  
+
 										</div>
 									</div>
 								</div>
@@ -107,7 +107,7 @@
 				@empty
 				<h4>Sorry no special offers available</h4>
 				@endforelse
-				@endisset			
+				@endisset
 							<div class="clearfix"></div>
 						 </div>
 		</div>
@@ -119,6 +119,6 @@
 @include('layouts.main.footer')
 
  <!-- JAVASCRIPT FILES -->
- @include('layouts.main.otherScripts')		
+ @include('layouts.main.otherScripts')
 </body>
 </html>
