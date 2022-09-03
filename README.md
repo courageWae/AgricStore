@@ -36,9 +36,14 @@ php artisan migrate --seed
 ```
 
 ## Usage
+To be able to post items on the pages, you will need to logged in as an Administrator. the application comes with a dummy addministration with credentials below.
+* Email : admin@admin.com
+* Password : password01
+
 A User is required to have a registered account to facilitate easy of ordering. 
 
 The system assigns a personal dashboard for the user for managing the profile and orders.
+
 
 ### CONCLUSION
 This application is not entirely tested, it was developed out of leisure and boredom. There may be bugs lurking all over.
