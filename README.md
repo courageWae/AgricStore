@@ -44,7 +44,7 @@ php artisan key:generate
 php artisan migrate --seed
 ```
 
-### Step FOUR
+### Step FIVE
 
 ```bash
 php artisan serve
