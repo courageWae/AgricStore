@@ -5,6 +5,15 @@ Agric Store is an online store or e-commerce website that helps people to get ea
 A user gets a personalized dashboard to manage ordered items, and profile. 
 The Admin Always gets a dashboard to monitor all activities in the application.
 
+## Tech Stacks:
+
+* Php
+* Laravel
+* Mysql
+* Javascript
+* Html
+* Css
+
 ## Installation
 
 Agric Store was built with the Laravel framework, so it follows a typical Laravel project installation. However, for the sake of elaboration, the below indicates how to install this project on your computer.
@@ -34,6 +43,13 @@ php artisan key:generate
 ```bash
 php artisan migrate --seed
 ```
+
+### Step FOUR
+
+```bash
+php artisan serve
+```
+Host the application on http://127.0.0.1:8000
 
 ## Usage
 To be able to post items on the pages, you will need to logged in as an Administrator. the application comes with a dummy addministration with credentials below.
